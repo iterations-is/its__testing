@@ -1,0 +1,11 @@
+{
+  "name": "its__testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "jest": "^27.5.1",
+    "uuid": "^8.3.2"
+  }
+}
