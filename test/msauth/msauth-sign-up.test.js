@@ -1,4 +1,4 @@
-const { client } = require('../utils/axios');
+const { client } = require('../../utils/axios');
 const { v4: uuid } = require('uuid');
 const jwtDecode = require('jwt-decode');
 
