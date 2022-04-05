@@ -9,7 +9,7 @@ const schemaAbout = Joi.object().keys({
 	description: Joi.string().required(),
 });
 
-describe('auth', () => {
+describe('MS - about information', () => {
 	it('should do heathCheck of ms-auth', async () => {
 		const res = await client.get('/auth-service/about');
 		const val = schemaAbout.validate(res.data);

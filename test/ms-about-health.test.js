@@ -1,6 +1,6 @@
 const { client } = require('../utils/axios');
 
-describe('auth', () => {
+describe('MS - health check', () => {
 	it('should do heathCheck of ms-auth', async () => {
 		const res = await client.get('/auth-service/about/health');
 		expect(res.data).toBe("");
