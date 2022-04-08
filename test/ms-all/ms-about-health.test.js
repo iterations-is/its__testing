@@ -1,4 +1,4 @@
-const { client } = require('../utils/axios');
+const { client } = require('../../utils');
 
 describe('MS - health check', () => {
 	it('should do heathCheck of ms-auth', async () => {

@@ -1,7 +1,6 @@
-const { client } = require('../../utils/axios');
+const { client, signInAll } = require('../../utils');
 const { v4: uuid } = require('uuid');
 const Joi = require('joi');
-const { signInAll } = require('../../utils/signUpAll');
 
 const schemaInterpreter = Joi.object().keys({
 	id: Joi.string().uuid().required(),

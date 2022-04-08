@@ -1,6 +1,4 @@
-const { client } = require('../../utils/axios');
-const { v4: uuid } = require('uuid');
-const { signInAll } = require('../../utils/signUpAll');
+const { client, signInAll } = require('../../utils');
 
 describe('MSInterpreters - Validations', () => {
 	let accessTokenAdmin;

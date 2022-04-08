@@ -1,4 +1,4 @@
-const { client } = require('../utils/axios');
+const { client } = require('../../utils');
 const Joi = require('joi');
 
 const schemaAbout = Joi.object().keys({

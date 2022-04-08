@@ -1,4 +1,4 @@
-const { client } = require('../../utils/axios');
+const { client } = require('../../utils');
 
 describe('MSAuth - sign in', () => {
 	let accessToken;

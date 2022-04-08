@@ -1,5 +1,4 @@
-const { client } = require('../../utils/axios');
-const { v4: uuid } = require('uuid');
+const { client } = require('../../utils');
 
 describe('MSAuth - internal token verification', () => {
 	let accessToken;
