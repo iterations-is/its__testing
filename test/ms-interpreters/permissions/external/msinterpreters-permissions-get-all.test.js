@@ -33,7 +33,7 @@ describe('MSInterpreters – Permissions - get all interpreters', () => {
 		expect(res.status).toBe(401);
 	});
 
-	it(`should ${access[0][0] ? 'pass' : 'fail'} with admin role`, async () => {
+	it(`should ${access[0][1] ? 'pass' : 'fail'} with admin role`, async () => {
 		const res = await genRequest(accessTokenAdmin);
 		if (access[0][1]) {
 			expect(res.status).not.toBe(403);
@@ -42,7 +42,7 @@ describe('MSInterpreters – Permissions - get all interpreters', () => {
 		}
 	});
 
-	it(`should ${access[1][0] ? 'pass' : 'fail'} with authority role`, async () => {
+	it(`should ${access[1][1] ? 'pass' : 'fail'} with authority role`, async () => {
 		const res = await genRequest(accessTokenAuthority);
 		if (access[1][1]) {
 			expect(res.status).not.toBe(403);
@@ -51,7 +51,7 @@ describe('MSInterpreters – Permissions - get all interpreters', () => {
 		}
 	});
 
-	it(`should ${access[2][0] ? 'pass' : 'fail'} with user role`, async () => {
+	it(`should ${access[2][1] ? 'pass' : 'fail'} with user role`, async () => {
 		const res = await genRequest(accessTokenUser);
 		if (access[2][1]) {
 			expect(res.status).not.toBe(403);
@@ -60,7 +60,7 @@ describe('MSInterpreters – Permissions - get all interpreters', () => {
 		}
 	});
 
-	it(`should ${access[3][0] ? 'pass' : 'fail'} with banned role`, async () => {
+	it(`should ${access[3][1] ? 'pass' : 'fail'} with banned role`, async () => {
 		const res = await genRequest(accessTokenBanned);
 		if (access[3][1]) {
 			expect(res.status).not.toBe(403);

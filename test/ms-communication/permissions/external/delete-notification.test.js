@@ -1,16 +1,16 @@
 const { client, signInAll } = require('../../../../utils');
 
-describe('MSInterpreters – Permissions - delete interpreter', () => {
+describe('MSCommunication – Permissions - delete notification', () => {
 	let accessTokenAdmin;
 	let accessTokenAuthority;
 	let accessTokenUser;
 	let accessTokenBanned;
 
-	let URL = '/interpreters-service/interpreters/fakeInterpreterId';
+	let URL = '/communication-service/notifications/fakeId';
 	const access = [
 		['admin', true],
-		['authority', false],
-		['user', false],
+		['authority', true],
+		['user', true],
 		['banned', false],
 	];
 	const genRequest = (token = null) =>

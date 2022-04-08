@@ -1,20 +1,20 @@
 const { client, signInAll } = require('../../../../utils');
 
-describe('MSInterpreters – Permissions - delete interpreter', () => {
+describe('MSCommunication – Permissions - get all notifications', () => {
 	let accessTokenAdmin;
 	let accessTokenAuthority;
 	let accessTokenUser;
 	let accessTokenBanned;
 
-	let URL = '/interpreters-service/interpreters/fakeInterpreterId';
+	let URL = '/communication-service/notifications';
 	const access = [
 		['admin', true],
-		['authority', false],
-		['user', false],
+		['authority', true],
+		['user', true],
 		['banned', false],
 	];
 	const genRequest = (token = null) =>
-		client.delete(URL, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+		client.get(URL, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
 
 	// Authorization
 
@@ -61,6 +61,7 @@ describe('MSInterpreters – Permissions - delete interpreter', () => {
 	});
 
 	it(`should ${access[3][1] ? 'pass' : 'fail'} with banned role`, async () => {
+		console.log(accessTokenBanned);
 		const res = await genRequest(accessTokenBanned);
 		if (access[3][1]) {
 			expect(res.status).not.toBe(403);
