@@ -32,14 +32,6 @@ describe('MSAuth - internal token verification', () => {
 		expect(res?.data?.payload?.tokenType).toBe('access');
 	});
 
-	it('should fail token verification because of missing internal header', async () => {
-		const res = await client.post('/auth-service/tokens/verification', {
-			accessToken,
-		});
-
-		expect(res.status).toBe(403);
-	});
-
 	it('should fail token verification because of missing token (simulate transitive auth request)', async () => {
 		const res = await client.post(
 			'/auth-service/tokens/verification',
