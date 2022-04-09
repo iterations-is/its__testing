@@ -1,4 +1,3 @@
-
 const { client, signInAll } = require('../../../../utils');
 
 describe('MSMonitoring – Permissions - sign up', () => {
@@ -62,7 +61,6 @@ describe('MSMonitoring – Permissions - sign up', () => {
 	});
 
 	it(`should ${access[3][1] ? 'pass' : 'fail'} with banned role`, async () => {
-		console.log(accessTokenBanned);
 		const res = await genRequest(accessTokenBanned);
 		if (access[3][1]) {
 			expect(res.status).not.toBe(403);

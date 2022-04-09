@@ -61,7 +61,6 @@ describe('MSCommunication – Permissions - get all notifications', () => {
 	});
 
 	it(`should ${access[3][1] ? 'pass' : 'fail'} with banned role`, async () => {
-		console.log(accessTokenBanned);
 		const res = await genRequest(accessTokenBanned);
 		if (access[3][1]) {
 			expect(res.status).not.toBe(403);
