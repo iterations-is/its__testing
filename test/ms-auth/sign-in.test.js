@@ -29,12 +29,12 @@ describe('MSAuth - sign in', () => {
 			token: accessToken,
 		});
 
-		expect(res.status).toBe(400);
+		expect(res.status).toBe(403);
 	});
 
 	it('should fail refresh tokens if no token is provided', async () => {
 		const res = await client.post('/auth-service/refresh', {});
 
-		expect(res.status).toBe(400);
+		expect(res.status).toBe(403);
 	});
 });
