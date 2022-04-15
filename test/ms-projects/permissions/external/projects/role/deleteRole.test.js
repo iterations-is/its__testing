@@ -45,7 +45,6 @@ describe('MSProjects – Permissions - delete role', () => {
 
 	it(`should ${access[1][1] ? 'pass' : 'fail'} with authority role`, async () => {
 		const res = await genRequest(accessTokenAuthority);
-		console.log(res.data);
 		if (access[1][1]) {
 			expect(res.status).toBe(403);
 			expect(res.data.code).toBe('PROJECT_PERMISSION_DENIED');

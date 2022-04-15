@@ -1,12 +1,12 @@
 const { client, signInAll } = require('../../../../../../utils');
 
-describe('MSProjects – Permissions - join team', () => {
+describe('MSProjects – Permissions - update part', () => {
 	let accessTokenAdmin;
 	let accessTokenAuthority;
 	let accessTokenUser;
 	let accessTokenBanned;
 
-	let URL = '/projects-service/projects/fakeIdProject/team/fakeIdRole';
+	let URL = '/projects-service/projects/fakeIdProject/parts/fakeIdPart';
 	const access = [
 		['admin', true],
 		['authority', true],
@@ -36,7 +36,8 @@ describe('MSProjects – Permissions - join team', () => {
 	it(`should ${access[0][1] ? 'pass' : 'fail'} with admin role`, async () => {
 		const res = await genRequest(accessTokenAdmin);
 		if (access[0][1]) {
-			expect(res.status).not.toBe(403);
+			expect(res.status).toBe(403);
+			expect(res.data.code).toBe('PROJECT_PERMISSION_DENIED');
 		} else {
 			expect(res.status).toBe(403);
 		}
@@ -45,7 +46,8 @@ describe('MSProjects – Permissions - join team', () => {
 	it(`should ${access[1][1] ? 'pass' : 'fail'} with authority role`, async () => {
 		const res = await genRequest(accessTokenAuthority);
 		if (access[1][1]) {
-			expect(res.status).not.toBe(403);
+			expect(res.status).toBe(403);
+			expect(res.data.code).toBe('PROJECT_PERMISSION_DENIED');
 		} else {
 			expect(res.status).toBe(403);
 		}
@@ -54,7 +56,8 @@ describe('MSProjects – Permissions - join team', () => {
 	it(`should ${access[2][1] ? 'pass' : 'fail'} with user role`, async () => {
 		const res = await genRequest(accessTokenUser);
 		if (access[2][1]) {
-			expect(res.status).not.toBe(403);
+			expect(res.status).toBe(403);
+			expect(res.data.code).toBe('PROJECT_PERMISSION_DENIED');
 		} else {
 			expect(res.status).toBe(403);
 		}

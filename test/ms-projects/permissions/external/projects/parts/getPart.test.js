@@ -1,12 +1,12 @@
 const { client, signInAll } = require('../../../../../../utils');
 
-describe('MSProjects – Permissions - join team', () => {
+describe('MSProjects – Permissions - get part', () => {
 	let accessTokenAdmin;
 	let accessTokenAuthority;
 	let accessTokenUser;
 	let accessTokenBanned;
 
-	let URL = '/projects-service/projects/fakeIdProject/team/fakeIdRole';
+	let URL = '/projects-service/projects/fakeIdProject/parts/fakeIdPart';
 	const access = [
 		['admin', true],
 		['authority', true],
@@ -14,7 +14,7 @@ describe('MSProjects – Permissions - join team', () => {
 		['banned', false],
 	];
 	const genRequest = (token = null) =>
-		client.patch(URL, {}, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+		client.get(URL, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
 
 	// Authorization
 
@@ -35,6 +35,8 @@ describe('MSProjects – Permissions - join team', () => {
 
 	it(`should ${access[0][1] ? 'pass' : 'fail'} with admin role`, async () => {
 		const res = await genRequest(accessTokenAdmin);
+		console.log(res.data);
+
 		if (access[0][1]) {
 			expect(res.status).not.toBe(403);
 		} else {

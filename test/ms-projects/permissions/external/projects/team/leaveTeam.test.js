@@ -44,7 +44,6 @@ describe('MSProjects – Permissions - leave team', () => {
 
 	it(`should ${access[1][1] ? 'pass' : 'fail'} with authority role`, async () => {
 		const res = await genRequest(accessTokenAuthority);
-		console.log(res.data);
 		if (access[1][1]) {
 			expect(res.status).not.toBe(403);
 		} else {
