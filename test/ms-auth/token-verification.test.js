@@ -18,13 +18,9 @@ describe('MSAuth - internal token verification', () => {
 	it('should verify tokens', async () => {
 		const res = await client.post(
 			'/auth-service/tokens/verification',
+			{ accessToken },
 			{
-				accessToken,
-			},
-			{
-				headers: {
-					'x-its-ms': process.env.INTERNAL_TOKEN,
-				},
+				headers: { 'x-its-ms': process.env.INTERNAL_TOKEN },
 			},
 		);
 
@@ -37,9 +33,7 @@ describe('MSAuth - internal token verification', () => {
 			'/auth-service/tokens/verification',
 			{},
 			{
-				headers: {
-					'x-its-ms': process.env.INTERNAL_TOKEN,
-				},
+				headers: { 'x-its-ms': process.env.INTERNAL_TOKEN },
 			},
 		);
 
