@@ -1,12 +1,12 @@
-const { client, signInAll } = require('../../../../../../utils');
+const { client, signInAll } = require('../../../../../utils');
 
-describe('MSProjects – Permissions - get part', () => {
+describe('MSProjects – Permissions - find project', () => {
 	let accessTokenAdmin;
 	let accessTokenAuthority;
 	let accessTokenUser;
 	let accessTokenBanned;
 
-	let URL = '/projects-service/projects/fakeIdProject/parts/fakeIdPart';
+	let URL = '/projects-service/projects';
 	const access = [
 		['admin', true],
 		['authority', true],
