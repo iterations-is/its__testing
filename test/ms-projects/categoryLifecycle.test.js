@@ -20,7 +20,7 @@ describe('MSProjects - category lifecycle', () => {
 		accessTokenAdmin = tokens.accessTokenAdmin;
 	});
 
-	it('should have one notification', async () => {
+	it('should create category', async () => {
 		const res = await client.post(
 			'/projects-service/categories',
 			{
