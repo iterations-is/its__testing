@@ -11,6 +11,7 @@ const schemaUser = Joi.object().keys({
 	role: Joi.object().required().keys({
 		name: Joi.string().required(),
 	}),
+	gravatar: Joi.string().uri(),
 });
 
 describe('MSUsers - user lifecycle', () => {
@@ -105,6 +106,34 @@ describe('MSUsers - user lifecycle', () => {
 
 		expect(res.status).toBe(200);
 		expect((accessToken = res?.data?.payload?.accessToken)).not.toBeUndefined();
+	});
+
+	it('should get self', async () => {
+		const res = await client.get('/users-service/users/self', {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+
+		expect(res.status).toBe(200);
+		const val = schemaUser.validate(res.data?.payload);
+		expect(val.error).toBe(undefined);
+		expect(res.data?.payload?.id).toBe(userId);
+		expect(res.data?.payload?.email).toBe(userData.email);
+		expect(res.data?.payload?.username).toBe(userData.username);
+		expect(res.data?.payload?.name).toBe(userData.name);
+	});
+
+	it('should get user', async () => {
+		const res = await client.get(`/users-service/users/${userId}`, {
+			headers: { Authorization: `Bearer ${accessToken}` },
+		});
+
+		expect(res.status).toBe(200);
+		const val = schemaUser.validate(res.data?.payload);
+		expect(val.error).toBe(undefined);
+		expect(res.data?.payload?.id).toBe(userId);
+		expect(res.data?.payload?.email).toBe(userData.email);
+		expect(res.data?.payload?.username).toBe(userData.username);
+		expect(res.data?.payload?.name).toBe(userData.name);
 	});
 
 	it('should delete user', async () => {
