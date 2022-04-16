@@ -2,17 +2,14 @@ const { client, signInAll } = require('../../utils');
 const { v4: uuid } = require('uuid');
 const Joi = require('joi');
 
-const schemaCategory = Joi.object().keys({
-	id: Joi.string().uuid().required(),
-	name: Joi.string().required(),
-});
-
 describe('MSProjects - project lifecycle', () => {
 	let accessTokenAdmin;
 	let categoryId;
 	const categoryName = uuid();
 	let projectId;
 	let projectResponse;
+	let partId;
+	let partResponse;
 
 	// Authorization
 
@@ -155,6 +152,74 @@ describe('MSProjects - project lifecycle', () => {
 		expect(res.status).toBe(200);
 		const foundProject = res.data?.payload?.projects?.find((project) => project.id === projectId);
 		expect(foundProject).toBeUndefined();
+	});
+
+	it('should create a part', async () => {
+		const res = await client.post(
+			`/projects-service/projects/${projectId}/parts`,
+			{
+				data: 'Content file raw',
+				interpreterName: 'interpreter',
+				interpreterVersion: '1.0.0',
+			},
+			{ headers: { Authorization: `Bearer ${accessTokenAdmin}` } },
+		);
+
+		expect(res.status).toBe(200);
+		partId = res.data?.payload?.id;
+	});
+
+	it('should get a part', async () => {
+		const res = await client.get(`/projects-service/projects/${projectId}/parts/${partId}`, {
+			headers: { Authorization: `Bearer ${accessTokenAdmin}` },
+		});
+
+		expect(res.status).toBe(200);
+		partResponse = res.data?.payload;
+		expect(partResponse?.sha).toBeDefined();
+		expect(partResponse?.decodedContent).toBe('Content file raw');
+	});
+
+	it('should update a part', async () => {
+		const res = await client.patch(
+			`/projects-service/projects/${projectId}/parts/${partId}`,
+			{
+				sha: partResponse.sha,
+				data: 'Content file raw 2',
+				interpreterName: 'interpreter',
+				interpreterVersion: '1.0.0',
+			},
+			{ headers: { Authorization: `Bearer ${accessTokenAdmin}` } },
+		);
+
+		expect(res.status).toBe(200);
+	});
+
+	it('should get a part with updated content', async () => {
+		const res = await client.get(`/projects-service/projects/${projectId}/parts/${partId}`, {
+			headers: { Authorization: `Bearer ${accessTokenAdmin}` },
+		});
+
+		expect(res.status).toBe(200);
+		partResponse = res.data?.payload;
+		expect(partResponse?.sha).toBeDefined();
+		expect(partResponse?.decodedContent).toBe('Content file raw 2');
+	});
+
+	it('should delete part', async () => {
+		const res = await client.delete(`/projects-service/projects/${projectId}/parts/${partId}`, {
+			headers: { Authorization: `Bearer ${accessTokenAdmin}` },
+		});
+
+		expect(res.status).toBe(200);
+	});
+
+	it('should not get a part', async () => {
+		const res = await client.get(`/projects-service/projects/${projectId}/parts/${partId}`, {
+			headers: { Authorization: `Bearer ${accessTokenAdmin}` },
+		});
+
+		expect(res.status).toBe(404);
 	});
 
 	it('should delete project', async () => {
